@@ -1,0 +1,15 @@
+import java.util.Map;
+
+public class Errors {
+	
+	String ErrorName;
+	
+	public Errors (String err) {
+		this.ErrorName=err;
+	}
+	public static void FindErrors(String crntSrc, String crntProd, Map errMap) {
+		Word src= new Word (crntSrc);
+		Word prod= new Word (crntProd);
+		
+	}
+}

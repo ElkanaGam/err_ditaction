@@ -1,0 +1,10 @@
+
+public class Phoneme {
+	
+	char Name;
+	
+	public Phoneme(char letter) {
+		this.Name=letter;
+	}
+
+}

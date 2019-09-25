@@ -1,0 +1,58 @@
+import java.util.List;
+import java.util.Map;
+
+
+
+
+public class Errors {
+	
+	String ErrorName;
+	static int [][]SyllOmisiion = {{0,0},{0,0},{0,0},{0,0}};
+	
+	public Errors (String err) {
+		this.ErrorName=err;
+	}
+	public static void FindErrors(String crntSrc, String crntProd, Map errMap) {
+		Assistent as = new Assistent();
+		if (as.isPermotation(crntSrc, crntProd)) {
+			///exit function here!! 
+		}
+		
+		Word src= new Word (crntSrc);
+		Word prod= new Word (crntProd);
+		List <BoundList<Syllable>> matchingList  = as.MatchSyllable(src, prod);
+		//prosodic section
+		//
+		for (int i = 0 ; i< matchingList.size(); i++) {
+			//syllable omission checking:
+			Syllable s1 = matchingList.get(i).get(0); //source
+			Syllable s2 = matchingList.get(i).get(1); //production
+			SyllOmisiion[i][0]++;							  // mark occurrence of i th syllable
+			if (s2 == null) {
+				SyllOmisiion[i][1]++;						  //omission, mark it 
+				
+			}
+			else {									  //find segmenatl errors
+				//onset section
+				List <Consonants> onset1 = s1.getOnset();
+				List <Consonants> onset2 = s2.getCoda();
+				if (onset1.size() != onset2.size()) {
+					//report error omission
+				}
+				for (Consonants c : onset1) {
+					//report occurrence
+					
+					if (!onset2.contains(c)) {
+						//report error
+					}
+					else {
+						//checking for assimilation
+						
+						
+					}
+						
+				}
+			}
+		}
+	}
+}

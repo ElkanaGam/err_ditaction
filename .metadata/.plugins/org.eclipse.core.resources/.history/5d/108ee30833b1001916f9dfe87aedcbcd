@@ -1,0 +1,116 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+
+
+public class Errors {
+	
+	String ErrorName;
+	static int [][] SyllOmisiion = {{0,0},{0,0},{0,0},{0,0}};  //the ith place represents the ith syllable in word
+	static int [][] OnsetOmission = {{0,0},{0,0}}; //the first row for opening onset, the second for any other onset
+	static int [][] CodaOmission = {{0,0},{0,0}}; // the first row for closing coda , the second for any othe coda 
+	static int [] ClusterSimlification = {0,0}; 
+	static Map<String, int[]> SegmentCount = new HashMap <String, int []>();
+	static Map<String, List<String>> SegmentSubtitution = new HashMap <String, List<String>>();
+	
+	public Errors (String err) {
+		this.ErrorName=err;
+	}
+	public static void FindErrors(String crntSrc, String crntProd, Map errMap) {
+		Assistent as = new Assistent();
+		if (as.isPermotation(crntSrc, crntProd)) {
+			///exit function here!! 
+		}
+		
+		Word src= new Word (crntSrc);
+		Word prod= new Word (crntProd);
+		List <BoundList<Syllable>> matchingList  = as.MatchSyllable(src, prod);  
+		List <Consonants> wordConsonants = new ArrayList <Consonants>(); // a list contains all the consonants of the word
+		for (BoundList<Syllable> b : matchingList) {
+			wordConsonants.addAll(b.get(0).getOnset());
+			wordConsonants.addAll(b.get(0).getCoda());			
+		}
+		//prosodic section
+		//
+		for (int i = 0 ; i< matchingList.size(); i++) {
+			//syllable omission checking:
+			Syllable s1 = matchingList.get(i).get(0); //source
+			Syllable s2 = matchingList.get(i).get(1); //production
+			SyllOmisiion[i][0]++;							  // mark occurrence of i th syllable
+			if (s2 == null) {
+				SyllOmisiion[i][1]++;						  //omission, mark it 
+				
+			}
+			else {							
+				//onset part
+				PartChecking(s1, s2, "onset", m, arr, wordConsonants);
+				//coda part
+				PartChecking(s1, s2, "coda", m, arr, wordConsonants);
+				//rhyme part
+			}
+		}
+	}
+	
+	
+	
+	static void PartChecking(Syllable src, Syllable prod, String part, Map m, int [][] arr, List <Consonants> wordConsonants) {
+		//onset section
+		List <Consonants> part1 = src.getPart(part);  //source part of syllable
+		List <Consonants> part2 = prod.getPart(part); //production part of syllable
+		int index;  //for error arr parameter update
+		//cluster section
+		if (src.isCluster) {
+			//TO DO
+			ClusterSimlification[0]++;
+			//cluster simplification
+			if (src.getPart(part).size() != prod.getPart(part).size()) {
+				ClusterSimlification[1]++;
+			}
+		}
+		else {
+			if (part1.size()>0) {
+				//initial onset
+				if ((src.position == 0) && (part.equals("onset"))){
+					index  = 0;
+				}
+				//closing coda
+				else if ((src.position == 1) && (part.equals("coda"))){
+					index   = 0;
+				}
+				//in the middle of the word
+				else {
+					index = 1;
+				}
+				//mark occurrence of this part of word
+				arr[index][0]++;
+				//omission detection
+				if (part1.size() != part2.size()) {
+					//report error omission
+					arr[index][1]++;
+				}
+				Consonants a = part1.get(0);
+				String cName = a.Name;
+				if (SegmentCount.get(cName) == null) {
+					int [] temp = {1,0};
+					SegmentCount.put(cName,temp);
+				}
+				Consonants b = part2.get(0);
+				//assimilation detection
+				if (!a.equals(b)) {
+					if (wordConsonants.contains(b)) {
+						//report assimilation
+					}
+					//segmental error detection
+					else {
+						//if (segmentMap.contain a+"->"+b)...
+					}
+				}
+					
+			}
+
+		}
+	}
+}

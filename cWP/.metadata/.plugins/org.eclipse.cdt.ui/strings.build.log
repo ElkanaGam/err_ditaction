@@ -1,0 +1,7 @@
+18:56:56 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+
+18:56:57 Build Finished. 0 errors, 0 warnings. (took 868ms)
+

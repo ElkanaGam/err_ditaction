@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;HW2.c/hw2.c&apos; to &apos;towork.c&apos;" description="Rename resource &apos;hw2.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="hw2.c" name="towork.c" stamp="1544105169928" updateReferences="true"/>
+</session>

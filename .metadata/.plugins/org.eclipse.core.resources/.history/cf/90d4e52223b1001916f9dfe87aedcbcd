@@ -1,0 +1,83 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+
+
+
+public class Errors {
+	
+	String ErrorName;
+	static int [][]SyllOmisiion = {{0,0},{0,0},{0,0},{0,0}};
+	
+	public Errors (String err) {
+		this.ErrorName=err;
+	}
+	public static void FindErrors(String crntSrc, String crntProd, Map errMap) {
+		Assistent as = new Assistent();
+		if (as.isPermotation(crntSrc, crntProd)) {
+			///exit function here!! 
+		}
+		
+		Word src= new Word (crntSrc);
+		Word prod= new Word (crntProd);
+		List <BoundList<Syllable>> matchingList  = as.MatchSyllable(src, prod);  
+		List <Consonants> wordConsonants = new ArrayList <Consonants>(); // a list contains all the consonants of the word
+		for (BoundList<Syllable> b : matchingList) {
+			wordConsonants.addAll(b.get(0).getOnset());
+			wordConsonants.addAll(b.get(0).getCoda());			
+		}
+		//prosodic section
+		//
+		for (int i = 0 ; i< matchingList.size(); i++) {
+			//syllable omission checking:
+			Syllable s1 = matchingList.get(i).get(0); //source
+			Syllable s2 = matchingList.get(i).get(1); //production
+			SyllOmisiion[i][0]++;							  // mark occurrence of i th syllable
+			if (s2 == null) {
+				SyllOmisiion[i][1]++;						  //omission, mark it 
+				
+			}
+			else {							
+				//onset part
+				PartChecking(s1, s2, "onset", m, arr, wordConsonants);
+				//coda part
+				PartChecking(s1, s2, "coda", m, arr, wordConsonants);
+				//rhyme part
+			}
+		}
+	}
+	
+	
+	
+	static void PartChecking(Syllable src, Syllable prod, String part, Map m, int [][] arr, List <Consonants> wordConsonants) {
+		//onset section
+		List <Consonants> part1 = src.getPart(part);  //source part of syllable
+		List <Consonants> part2 = prod.getPart(part); //production part of syllable
+		//cluster section
+		if (src.isCluster) {
+			//TO DO
+		}
+		else {
+			//omission detection
+			if (part1.size() != part2.size()) {
+				//report error omission
+			}
+			//assimilation detection
+			if (part1.size()>0) {
+				Consonants a = part1.get(0);
+				Consonants b = part2.get(0);
+				if (!a.equals(b)) {
+					if (wordConsonants.contains(b)) {
+						//report assimilation
+					}
+					//segmental error detection
+					else {
+						//if (segmentMap.contain a+"->"+b)...
+					}
+				}
+					
+			}
+		}
+	}
+}

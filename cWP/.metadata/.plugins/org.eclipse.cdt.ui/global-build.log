@@ -1,0 +1,38 @@
+Info: Nothing to build for strings
+Info: Nothing to build for strings
+18:39:00 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:47:42 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:51:30 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:52:27 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:53:11 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:54:52 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:55:56 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:56:34 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
+18:56:56 **** Incremental Build of configuration Debug for project strings ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o try.o "..\\try.c" 
+gcc -o strings.exe try.o 
